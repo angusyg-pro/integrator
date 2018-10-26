@@ -1,0 +1,55 @@
+<div class="container home">
+  <div class="row justify-content-center">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-body">
+          <form name="newForm" class="form" ng-submit="home.download()">
+            <div class="row">
+              <div class="col-12">
+                <div class="form-group row">
+                  <label for="versionFrom" class="col-3 col-form-label">Versions</label>
+                  <select class="form-control col-3" id="versionFrom" name="versionFrom" ng-model="dl.versionFrom" required>
+                    <option ng-repeat="version in home.versions | orderBy: '-'" ng-value="version">{{version}}</option>
+                  </select>
+                </div>
+                <div class="form-group row">
+                  <label for="versionTo" class="col-3 col-form-label">Version finale</label>
+                  <input type="text" class="form-control col-3" id="versionTo" name="versionTo" ng-model="dl.versionTo" required>
+                </div>
+                <div class="form-group row">
+                  <label for="emails" class="col-3 col-form-label">Emails pour envoi du lien final</label>
+                  <input type="text" class="form-control col-5" id="emails" name="emails" ng-model="dl.emails" required>
+                </div>
+                <div class="form-group row">
+                  <div class="col-3">Remplacement du jar GED</div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" ng-model="dl.gedReplace">
+                  </div>
+                </div>
+                <div ng-if="replaceGED === true">
+                  <div class="form-group row">
+                    <div class="col-3">Snapshot</div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" ng-model="dl.gedSnapshot">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="gedVersion" class="col-3 col-form-label">Versions</label>
+                    <select class="form-control col-5" id="gedVersion" name="gedVersion" ng-model="dl.gedVersion" required>
+                      <option ng-repeat="gedVersion in home.gedVersions | snapshotFilter:gedSnapshot" ng-value="gedVersion">{{gedVersion.jar}}</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-group form-inline">
+                  <div class="m-auto">
+                    <input type="submit" class="btn btn-outline-primary" ng-disabled="!newForm.$valid" value="Télécharger">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
